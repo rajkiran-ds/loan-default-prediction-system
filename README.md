@@ -1,148 +1,154 @@
-# Loan Default Prediction System
+# 🏦 Loan Default Prediction System
 
-## Live Demo
 
-🚀 Streamlit Application:
-https://rajkiran-ds-loan-default-prediction-system-app-vchisg.streamlit.app/
+A machine learning system that predicts whether a loan applicant is likely to default — helping financial institutions reduce risk and automate loan approval decisions.
+
+🚀 **Live Demo:** [Launch Streamlit App](https://rajkiran-ds-loan-default-prediction-system-app-vchisg.streamlit.app/)
+
+---
 
 ## Problem Statement
 
-XYZ Financial Firm provides multiple loan services such as:
+XYZ Financial Firm offers Business, Personal, and Educational loans. Their current approval process is entirely manual, making it slow and prone to missed defaulters. This system replaces that with an ML pipeline that flags high-risk applicants automatically.
 
-* Business Loans
-* Personal Loans
-* Educational Loans
+---
 
-Currently, the loan approval process relies heavily on manual verification and the company struggles to accurately identify potential loan defaulters.
+## Business Impact
 
-This project builds a Machine Learning based Loan Default Prediction System that predicts whether a customer is likely to default on a loan.
+| Goal | Approach |
+|------|----------|
+| Reduce financial risk | Predict defaulters before approval |
+| Handle class imbalance | SMOTE oversampling |
+| Improve minority class detection | Macro F1-score optimization |
+| Automate risk analysis | End-to-end prediction pipeline |
+| Production-ready deployment | Streamlit + Docker |
 
+---
 
-## Business Objective
+## Tech Stack
 
-* Reduce financial risk
-* Improve loan approval efficiency
-* Identify high-risk applicants
-* Automate loan risk analysis
-* Improve minority class prediction performance
+| Category | Tools |
+|----------|-------|
+| Language | Python |
+| Data Processing | Pandas, NumPy |
+| ML Models | XGBoost, Scikit-learn |
+| Imbalance Handling | SMOTE |
+| App Framework | Streamlit |
+| Containerization | Docker |
+| Version Control | Git & GitHub |
 
+---
 
-## Technologies Used
+## ML Pipeline
 
-* Python
-* Pandas
-* NumPy
-* Scikit-learn
-* XGBoost
-* Random Forest
-* SMOTE
-* Streamlit
-* Docker
-* Git & GitHub
+```
+Data Loading → Missing Value Handling → Feature Engineering
+→ Encoding → Train-Test Split → SMOTE Oversampling
+→ XGBoost Training → Threshold Optimization → Prediction Pipeline
+→ Streamlit Deployment → Docker Containerization
+```
 
-
-## Machine Learning Workflow
-
-1. Data Loading
-2. Missing Value Handling
-3. Feature Engineering
-4. Encoding Categorical Variables
-5. Train-Test Split
-6. SMOTE Oversampling
-7. XGBoost Model Training
-8. Threshold Optimization
-9. Prediction Pipeline
-10. Streamlit Deployment
-11. Docker Containerization
+---
 
 ## Feature Engineering
 
-Additional features engineered for better model performance:
+Six custom features were engineered to improve prediction performance:
 
-* EMI Burden
-* Net Savings
-* Loan-to-Income Ratio
-* Delay-Default Interaction
-* Poor Credit Indicator
-* Total Products Held
+| Feature | Description |
+|---------|-------------|
+| EMI Burden | Monthly EMI as a fraction of income |
+| Net Savings | Income minus total loan obligations |
+| Loan-to-Income Ratio | Total loan amount relative to annual income |
+| Delay-Default Interaction | Combined signal of payment delays and past defaults |
+| Poor Credit Indicator | Binary flag for poor credit history |
+| Total Products Held | Number of financial products held by applicant |
+
+---
 
 ## Model Highlights
 
-* Imbalanced dataset handled using SMOTE
-* XGBoost Classifier used for final prediction
-* Random Forest used for experimentation
-* Threshold tuning performed
-* Macro F1-score optimization used
-* Feature engineering improved prediction capability
+- **XGBoost Classifier** used for final prediction
+- **Random Forest** used during experimentation
+- **SMOTE** applied to handle class imbalance
+- **Threshold tuning** performed for optimal recall/precision trade-off
+- **Macro F1-score** used as primary evaluation metric
+
+---
 
 ## Project Structure
 
+```
 Loan_Default_Prediction/
 │
-├── artifacts/
-├── images/
-├── logs/
+├── artifacts/              # Saved models and encoders
+├── images/                 # Screenshots and visuals
+├── logs/                   # Training and experimentation logs
 ├── src/
 │   ├── __init__.py
-│   ├── pipeline.py
-│   └── experimentation.py
+│   ├── pipeline.py         # Training pipeline
+│   └── experimentation.py  # Model experimentation
 │
-├── app.py
-├── main.py
+├── app.py                  # Streamlit application
+├── main.py                 # Pipeline entry point
 ├── Dockerfile
 ├── requirements.txt
 ├── setup.py
 ├── README.md
 └── .gitignore
+```
 
+---
 
-## Run Project
+## Getting Started
 
-### Install Requirements
+### 1. Install Requirements
 
+```bash
 pip install -r requirements.txt
+```
 
-### Run Training Pipeline
+### 2. Run Training Pipeline
 
+```bash
 python main.py
+```
 
-### Run Streamlit Application
+### 3. Launch Streamlit App
 
+```bash
 streamlit run app.py
+```
 
+---
 
 ## Docker Support
 
-### Build Docker Image
+### Build Image
 
-
+```bash
 docker build -t loan-default-app .
+```
 
-### Run Docker Container
+### Run Container
 
+```bash
 docker run loan-default-app
+```
 
-
-## Application Screenshots
-
-### Streamlit Homepage
-
-
-### Prediction Result
-
-
-### Docker Deployment
-
+---
 
 ## Future Improvements
 
-* Model monitoring
-* CI/CD integration
-* Cloud deployment
-* Advanced feature engineering
-* Explainable AI integration
+- [ ] Model monitoring & drift detection
+- [ ] CI/CD pipeline integration
+- [ ] Cloud deployment (AWS/Azure)
+- [ ] Advanced feature engineering
+- [ ] Explainable AI (SHAP values)
 
+---
 
 ## Author
 
-Raj Kiran Reddy
+**Raj Kiran Reddy**  
+B.Tech Data Science | MLRITM 
+📍 Hyderabad, Telangana, India
