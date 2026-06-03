@@ -1,7 +1,7 @@
 # 🏦 Loan Default Prediction System
 
 
-A machine learning system that predicts whether a loan applicant is likely to default — helping financial institutions reduce risk and automate loan approval decisions.
+A machine learning classification system that predicts whether a loan applicant is likely to default — helping financial institutions reduce risk and automate loan approval decisions.
 
 🚀 **Live Demo:** [Launch Streamlit App](https://rajkiran-ds-loan-default-prediction-system-app-vchisg.streamlit.app/)
 
@@ -9,7 +9,7 @@ A machine learning system that predicts whether a loan applicant is likely to de
 
 ## Problem Statement
 
-XYZ Financial Firm offers Business, Personal, and Educational loans. Their current approval process is entirely manual, making it slow and prone to missed defaulters. This system replaces that with an ML pipeline that flags high-risk applicants automatically.
+XYZ Financial Firm offers Business, Personal, and Educational loans. Their current approval process is entirely manual, making it slow and prone to missed defaulters. This system replaces that with an ML pipeline that flags high-risk applicants automatically using 10,000 historical loan records.
 
 ---
 
@@ -18,7 +18,7 @@ XYZ Financial Firm offers Business, Personal, and Educational loans. Their curre
 | Goal | Approach |
 |------|----------|
 | Reduce financial risk | Predict defaulters before approval |
-| Handle class imbalance | SMOTE oversampling |
+| Handle class imbalance | SMOTE oversampling (246 → 439 minority class) |
 | Improve minority class detection | Macro F1-score optimization |
 | Automate risk analysis | End-to-end prediction pipeline |
 | Production-ready deployment | Streamlit + Docker |
@@ -31,10 +31,11 @@ XYZ Financial Firm offers Business, Personal, and Educational loans. Their curre
 |----------|-------|
 | Language | Python |
 | Data Processing | Pandas, NumPy |
-| ML Models | XGBoost, Scikit-learn |
+| ML Models | XGBoost, Gradient Boosting, Random Forest, and more |
 | Imbalance Handling | SMOTE |
 | App Framework | Streamlit |
 | Containerization | Docker |
+| Model Serialization | Pickle |
 | Version Control | Git & GitHub |
 
 ---
@@ -42,9 +43,9 @@ XYZ Financial Firm offers Business, Personal, and Educational loans. Their curre
 ## ML Pipeline
 
 ```
-Data Loading → Missing Value Handling → Feature Engineering
-→ Encoding → Train-Test Split → SMOTE Oversampling
-→ XGBoost Training → Threshold Optimization → Prediction Pipeline
+Data Loading → Target Encoding → Drop ID Columns → Missing Value Handling
+→ Feature Engineering → Encoding → Train-Test Split → SMOTE Oversampling
+→ XGBoost Training → Threshold Tuning → Final Predictions
 → Streamlit Deployment → Docker Containerization
 ```
 
@@ -57,21 +58,51 @@ Six custom features were engineered to improve prediction performance:
 | Feature | Description |
 |---------|-------------|
 | EMI Burden | Monthly EMI as a fraction of income |
-| Net Savings | Income minus total loan obligations |
-| Loan-to-Income Ratio | Total loan amount relative to annual income |
+| Net Savings | Monthly income minus monthly expenses |
+| Loan-to-Income Ratio | Loan amount relative to monthly income |
 | Delay-Default Interaction | Combined signal of payment delays and past defaults |
-| Poor Credit Indicator | Binary flag for poor credit history |
-| Total Products Held | Number of financial products held by applicant |
+| Poor Credit Indicator | Binary flag for credit score below 600 |
+| Total Products Held | Count of all financial products held by applicant |
+
+---
+
+## Model Experimentation
+
+Seven classification algorithms were evaluated across four experiments before selecting the final model:
+
+| Model | Notes |
+|-------|-------|
+| KNN | Distance-based approach |
+| Naive Bayes | Probabilistic baseline |
+| Decision Tree | Non-linear splits |
+| Random Forest | Ensemble — strong baseline |
+| AdaBoost | Boosting ensemble |
+| **Gradient Boosting** | Best F1 in experimentation |
+| **XGBoost** | ✅ Final model — solved class imbalance |
+
+**Why XGBoost over Gradient Boosting?**
+
+Gradient Boosting had the best F1 score during experimentation but produced **all zeros for Class 1** (defaulters) in the classification report due to severe class imbalance (support: 246). XGBoost with SMOTE oversampling raised minority class support to **439** and with threshold tuning produced reliable predictions for both classes.
+
+**Experiments run:**
+
+| Experiment | Strategy |
+|------------|----------|
+| Base Data | Raw data, no treatment |
+| Winsorized Data | IQR-based outlier capping |
+| Log Transformed Data | Log1p on positive numeric columns |
+| Feature Selection + SMOTE | RF importance-based selection + SMOTE balancing |
 
 ---
 
 ## Model Highlights
 
 - **XGBoost Classifier** used for final prediction
-- **Random Forest** used during experimentation
-- **SMOTE** applied to handle class imbalance
-- **Threshold tuning** performed for optimal recall/precision trade-off
+- **SMOTE** raised minority class from 246 → 439 samples
+- **Threshold tuning** across 0.05–0.95 range for best Macro F1
+- **scale_pos_weight** used to further handle class imbalance
 - **Macro F1-score** used as primary evaluation metric
+- Feature importance extracted and top 15 features printed
 
 ---
 
@@ -85,8 +116,8 @@ Loan_Default_Prediction/
 ├── logs/                   # Training and experimentation logs
 ├── src/
 │   ├── __init__.py
-│   ├── pipeline.py         # Training pipeline
-│   └── experimentation.py  # Model experimentation
+│   ├── pipeline.py         # Final XGBoost training pipeline
+│   └── experimentation.py  # Multi-model experimentation
 │
 ├── app.py                  # Streamlit application
 ├── main.py                 # Pipeline entry point
@@ -113,6 +144,10 @@ pip install -r requirements.txt
 python main.py
 ```
 
+This generates:
+- Trained XGBoost model (`loan_xgb_model.pkl`)
+- Encoded feature columns (`model_columns.pkl`)
+
 ### 3. Launch Streamlit App
 
 ```bash
@@ -137,18 +172,32 @@ docker run loan-default-app
 
 ---
 
+## Application Screenshots
+
+### Streamlit Homepage
+![Homepage](images/streamlit_homepage.png)
+
+### Prediction Result
+![Prediction](images/streamlit_prediction.png)
+
+### Docker Deployment
+![Docker Run](images/docker_image1.png)
+![Docker Run](images/docker_image2.png)
+
+---
+
 ## Future Improvements
 
+- [ ] Hyperparameter tuning (GridSearchCV / Optuna)
 - [ ] Model monitoring & drift detection
 - [ ] CI/CD pipeline integration
 - [ ] Cloud deployment (AWS/Azure)
-- [ ] Advanced feature engineering
 - [ ] Explainable AI (SHAP values)
 
 ---
 
 ## Author
 
-**Raj Kiran Reddy**  
-B.Tech Data Science | MLRITM 
+**Raj Kiran Reddy**
+B.Tech Data Science | MLR Institute of Technology and Management
 📍 Hyderabad, Telangana, India
