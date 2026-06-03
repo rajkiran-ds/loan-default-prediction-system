@@ -182,8 +182,8 @@ docker run loan-default-app
 ![Prediction](images/streamlit_prediction.png)
 
 ### Docker Deployment
-![Docker Run](images/docker_image1.png)
-![Docker Run](images/docker_image2.png)
+![Docker Run](images/Docker_image1.png)
+![Docker Run](images/Docker_image2.png)
 
 ---
 
