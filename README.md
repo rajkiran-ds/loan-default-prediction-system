@@ -175,7 +175,8 @@ docker run loan-default-app
 ## Application Screenshots
 
 ### Streamlit Homepage
-![Homepage](images/streamlit_homepage.png)
+![Homepage](images/streamlit_homepage1.png)
+![Homepage](images/streamlit_homepage2.png)
 
 ### Prediction Result
 ![Prediction](images/streamlit_prediction.png)
