@@ -1,7 +1,7 @@
 # 🏦 Loan Default Prediction System
 
 ![Python](https://img.shields.io/badge/Python-3.10-blue?style=flat-square)
-![Model](https://img.shields.io/badge/Model-KMeans-green?style=flat-square)
+![Model](https://img.shields.io/badge/Model-XGBoost-green?style=flat-square)
 ![Streamlit](https://img.shields.io/badge/App-Streamlit-red?style=flat-square)
 ![Docker](https://img.shields.io/badge/Docker-Containerized-blue?style=flat-square)
 
