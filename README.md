@@ -1,5 +1,9 @@
 # 🏦 Loan Default Prediction System
 
+![Python](https://img.shields.io/badge/Python-3.10-blue?style=flat-square)
+![Model](https://img.shields.io/badge/Model-KMeans-green?style=flat-square)
+![Streamlit](https://img.shields.io/badge/App-Streamlit-red?style=flat-square)
+![Docker](https://img.shields.io/badge/Docker-Containerized-blue?style=flat-square)
 
 A machine learning classification system that predicts whether a loan applicant is likely to default — helping financial institutions reduce risk and automate loan approval decisions.
 
@@ -202,3 +206,6 @@ docker run loan-default-app
 **Raj Kiran Reddy**
 B.Tech Data Science | MLR Institute of Technology and Management
 📍 Hyderabad, Telangana, India
+
+[![GitHub](https://img.shields.io/badge/GitHub-Profile-black?style=flat-square&logo=github)](https://github.com/)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=flat-square&logo=linkedin)](https://linkedin.com/)
